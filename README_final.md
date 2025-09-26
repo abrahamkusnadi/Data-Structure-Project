@@ -77,28 +77,66 @@ void searchSlang(struct trieNode *root, char search[]) {
 }
 ```
 
----
+### Viewing Words by Prefix
+```c
+void searchPrefix(){
+	char search[1001];
 
-## 📂 Project Structure
+	int spaceflag = 0;
+	
+	do{
+		printf("Input a prefix to be searched [Must be more than 1 characters and contains no space]: ");
+		scanf("%[^\n]", search);
+		getchar();
+		spaceflag = hasSpace(search); 
+	}while(strlen(search) <= 1 || spaceflag == 0);
+	
+	char kata[1001];
+	angka = 1;
+	
+	searchSlangPrefix(root, kata, 0, search);
+	
+	if(angka == 1){
+		printf("\nThere is no prefix \"%s\" in the dictionary.\n", search);
+	}
+}
+
+void searchSlangPrefix(struct trieNode *curr, char buffer[], int depth, char search[]){
+	if(curr->word && strncmp(buffer, search, strlen(search)) == 0){
+		if(angka == 1){
+			printf("\nWords starts with \"%s\":\n", search);
+
+		}
+		buffer[depth] = '\0';
+		printf("%d. %s\n", angka, buffer);
+		angka++;
+		
+	}
+	
+	for(int i = 0 ; i < 128 ; i++){
+		if(curr->children[i] != NULL){
+			buffer[depth] = i + 'a';
+			searchSlangPrefix(curr->children[i], buffer, depth + 1, search);
+		}
+	}
+}
 ```
-📦 Data Structure - Slang Dictionary
- ┣ 📜 2702243590_AOL CODE.cpp       # Main program (C++)
- ┣ 📜 README.md                     # Documentation
- ┗ 📜 2702243590_Documentation.pdf  # Original documentation
+### View All Slang 
+```c
+void printAll(struct trieNode *curr, char buffer[], int depth){
+	if(curr->word == 1){
+		buffer[depth] = '\0';
+		printf("%d. %s\n", angka, buffer);
+		angka++;
+	}
+	
+	for(int i = 0 ; i < 128 ; i++){
+		if(curr->children[i] != NULL){
+			buffer[depth] = i + 'a';
+			printAll(curr->children[i], buffer, depth + 1);
+		}
+	}
 ```
-
----
-
-## ▶️ How to Run
-1. Make sure you have a C++ compiler (e.g., g++) installed.  
-2. Compile the program:
-   ```bash
-   g++ "2702243590_AOL CODE.cpp" -o slang_dict
-   ```
-3. Run the executable:
-   ```bash
-   ./slang_dict
-   ```
 
 ---
 
@@ -119,19 +157,19 @@ Successfully released a new slang word
 
 ## 🖼️ Example Screenshots
 ### Main Menu
-![Main Menu](screenshots/menu.png)
+![Main Menu](screenshots/Menu.png)
 
 ### Adding a New Slang Word
-![Add Slang](screenshots/add_slang.png)
+![Add Slang](screenshots/Insert.png)
 
 ### Searching for a Slang Word
-![Search Slang](screenshots/search_slang.png)
+![Search Slang](screenshots/Search.png)
 
 ### Viewing Words by Prefix
-![Prefix Search](screenshots/prefix_search.png)
+![Prefix Search](screenshots/Prefix.png)
 
 ### Viewing All Slang Words
-![View All](screenshots/view_all.png)
+![View All](screenshots/View.png)
 
 ---
 
