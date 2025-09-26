@@ -44,7 +44,9 @@ void insertWord(struct trieNode *root, char str[], char desc[]) {
         insertWord(root->children[idx], str + 1, desc);
     }
 }
-
+```
+### Search a Word
+```c
 void searchSlang(struct trieNode *root, char search[]) {
     struct trieNode *curr = root;
     for (int i = 0; search[i] != '\0'; i++) {
