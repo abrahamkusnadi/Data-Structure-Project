@@ -44,3 +44,21 @@ void insertWord(struct trieNode *root, char str[], char desc[]) {
         insertWord(root->children[idx], str + 1, desc);
     }
 }
+
+void searchSlang(struct trieNode *root, char search[]) {
+    struct trieNode *curr = root;
+    for (int i = 0; search[i] != '\0'; i++) {
+        int idx = search[i] - 'a';
+        if (curr->children[idx] == NULL) {
+            printf("Word not found.\n");
+            return;
+        }
+        curr = curr->children[idx];
+    }
+    if (curr != NULL && curr->word == 1) {
+        printf("Slang word: %s\n", search);
+        printf("Description: %s\n", curr->desc);
+    } else {
+        printf("Word not found.\n");
+    }
+}
